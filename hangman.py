@@ -1,7 +1,6 @@
 import getpass
 def main():
-
-# w - word to guess.
+ # w - word to guess.
   def get_w():
     while True:
       w=getpass.getpass("Enter a word to guess: ").lower()
@@ -9,8 +8,9 @@ def main():
        if w=="quit":
          quit=input("Do you want to quit? Y/N : ").lower()
          if quit=="y":
-            print("See you next time.")
-            break
+            return 1
+            #print("See you next time.")
+            #break
          else:
            print("Let's continue.")          
        else:
@@ -18,7 +18,7 @@ def main():
       else:
        print("Please, use only letters.")
 
-# g - your guess, a letter.
+ # g - your guess, a letter.
   def get_g():
     while True:
       g=input("Guess a letter: ").lower()
@@ -26,8 +26,9 @@ def main():
         if g=="quit":
           quit=input("Do you want to quit? Y/N : ").lower()
           if quit=="y":
-            print("See you next time.")
-            break
+            return 1
+            #print("See you next time.")
+            #break
           else:
             print("Let's continue.")
         elif len(g)==1:
@@ -37,7 +38,7 @@ def main():
       else:
         print("Please, use only one letters.")
       
-# d - difficulty, the number of wrong guesses. 
+ # d - difficulty, the number of wrong guesses. 
   def get_d():
     while True:
       d=input("Select a difficulty. Enter a number of wrong guesses: ")
@@ -48,8 +49,9 @@ def main():
         if d=="quit":
           quit=input("Do you want to quit? Y/N : ").lower()
           if quit=="y":
-            print("See you next time.")
-            break
+            return 1
+            #print("See you next time.")
+            #break
           else:
             print("Let's continue.")
         else:
@@ -86,23 +88,31 @@ def main():
       s+=p[i]
     return s
 
-
-
   w=get_w()
+  if w==1:
+    print("See you next time.")
+    return
+  
   l=wtl(w)
   p=wtp(w)
   s=pts(p)
   d=get_d()
+  if d ==1:
+    print("See you next time.")
+    return  
   c=0
 
-  #print("l",l)
-  #print("p",p)
-  #print("s",s)
+  # print("l",l)
+  # print("p",p)
+  # print("s",s)
 
   print("\n"+s+"\n")
 
   while c<d:
     g=get_g()
+    if g==1:
+      print("See you next time.")
+      break
     if g in w:
       f=w.find(g)
       while f>=0:
