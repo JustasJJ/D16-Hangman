@@ -156,9 +156,9 @@ def main():
   
   def guess_riddle():
     category=""
-    while category not in ["daiktai","gamta","gyvunai"]:
-     category=input('Select category (daiktai, gamta, gyvunai): ').lower()
-     if category not in ["daiktai","gamta","gyvunai"]:
+    while category not in ["daiktai","gamta","gyvūnai"]:
+     category=input('Select category (daiktai, gamta, gyvūnai): ').lower()
+     if category not in ["daiktai","gamta","gyvūnai"]:
        print("Incorrect! Try again.")
     d={}
     f=open("riddles.txt","r")
