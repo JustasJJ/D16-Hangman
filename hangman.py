@@ -1,4 +1,6 @@
 import getpass
+import random
+
 def main():
  # w - word to guess.
   def get_w():
@@ -89,7 +91,7 @@ def main():
     return s
 
   def menu():
-    print('\n\n\n*********HANGMAN GAME D16**********\n')
+    print('\n*********HANGMAN GAME D16**********\n')
     print('MENU:\n1. Guess a word\n2. Guess a riddle\n3. Quit game\n')
     play_mode=0
     while play_mode not in ["1","2","3"]:
@@ -100,8 +102,7 @@ def main():
     if play_mode == "1":
       guess_word()
     elif play_mode == "2":
-      #guess_riddle()
-      return
+      guess_riddle()
     elif play_mode=="3":
       print("Goodbye!")
       return
@@ -153,5 +154,64 @@ def main():
         else:
           print("\n"+pts(p)+"\n")
   
+  def guess_riddle():
+    category=""
+    while category not in ["daiktai","gamta","gyvunai"]:
+     category=input('Select category (daiktai, gamta, gyvunai): ').lower()
+     if category not in ["daiktai","gamta","gyvunai"]:
+       print("Incorrect! Try again.")
+    d={}
+    f=open("riddles.txt","r")
+    for line in f:
+      if line.strip() == '*'+category+'*':  # start reading file
+          break
+    for line in f:
+      if "*" not in line and len(line)>3: #populates dictionary with riddles
+        (key, val) = line.split("?")
+        d[key+"?"] = val[1:-1]
+      else:
+        break   #ends reading file
+    f.close()
+    riddle=random.choice(list(d.keys())) #selects random riddle
+
+    w=d[riddle]
+    l=wtl(w)
+    p=wtp(w)
+    s=pts(p)
+    d=get_d()
+    if d ==1:
+      print("See you next time.")
+      return  
+    c=0
+    print(riddle[:-1]+". Kas?")
+    print("\n"+s+"\n")
+    while c<d:
+      g=get_g()
+      if g==1:
+        print("See you next time.")
+        break
+      if g in w:
+        f=w.find(g)
+        while f>=0:
+          p[f]=" "+g.upper()+" "
+          f=w.find(g,f+1)
+        print("\n\n"+g.upper(),"is in a word!\tNumber of wrong answers left:",d-c)
+        s=pts(p)
+        print("\n"+s+"\n")
+        if "_" in s:
+          pass
+        else:
+          print("Congratulations! You won!")
+          break
+      else:
+        c+=1
+        print("\n\n"+g.upper(),"is missing...\tNumber of wrong guesses left:",d-c)
+        if d-c==0:
+          print("Game over. Correct answer was:",pts(l).upper())
+        else:
+          print("\n"+pts(p)+"\n")
+    return
+
   menu()
+  input('(Press any key to exit.)')
 main()
