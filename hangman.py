@@ -92,18 +92,20 @@ def main():
 
   def menu():
     print('\n*********HANGMAN GAME D16**********\n')
-    print('MENU:\n1. Guess a word\n2. Guess a riddle\n3. Quit game\n')
+    print('MENU:\n1. Guess input word\n2. Guess random word\n3. Guess a riddle\n4. Quit game\n')
     play_mode=0
-    while play_mode not in ["1","2","3"]:
-     play_mode=input('Please select your option (1,2 or 3): ')
-     if play_mode not in ["1","2","3"]:
+    while play_mode not in ["1","2","3","4"]:
+     play_mode=input('Please select your option (1,2,3 or 4): ')
+     if play_mode not in ["1","2","3","4"]:
        print("Incorrect! Try again.")
 
     if play_mode == "1":
       guess_word()
     elif play_mode == "2":
+      guess_random_word()
+    elif play_mode == "3":
       guess_riddle()
-    elif play_mode=="3":
+    elif play_mode=="4":
       print("Goodbye!")
       return
 
@@ -211,6 +213,56 @@ def main():
         else:
           print("\n"+pts(p)+"\n")
     return
+
+  def random_word():
+   words = [line.rstrip().lower() for line in open("words.txt")]
+   word=random.choice(words)
+   return word
+
+  def guess_random_word():
+    w=random_word()
+  
+    l=wtl(w)
+    p=wtp(w)
+    s=pts(p)
+    d=get_d()
+    if d ==1:
+      print("See you next time.")
+      return  
+    c=0
+
+    # print("l",l)
+    # print("p",p)
+    # print("s",s)
+
+    print("\n"+s+"\n")
+
+    while c<d:
+      g=get_g()
+      if g==1:
+        print("See you next time.")
+        break
+      if g in w:
+        f=w.find(g)
+        while f>=0:
+          p[f]=" "+g.upper()+" "
+          f=w.find(g,f+1)
+        print("\n\n"+g.upper(),"is in a word!\tNumber of wrong answers left:",d-c)
+        s=pts(p)
+        print("\n"+s+"\n")
+        if "_" in s:
+          pass
+        else:
+          print("Congratulations! You won!")
+          break
+      else:
+        c+=1
+        print("\n\n"+g.upper(),"is missing...\tNumber of wrong guesses left:",d-c)
+        if d-c==0:
+          print("Game over. Correct answer was:",pts(l).upper())
+        else:
+          print("\n"+pts(p)+"\n") 
+
 
   menu()
   input('(Press any key to exit.)')
