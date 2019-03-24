@@ -195,6 +195,8 @@ def main():
         b = "    |   /|\\\n    |    |\n    |   / \\\n"
         c = "    |\n    |___\n"
         gallows = a+b+c
+        if d > 7 or d < 0:  # max difficulty is 7.
+            d = 7
         hide_list = [[21], [31, 32, 33], [44, 56], [43], [45], [66], [68]]
         for i in range(d):
             for j in hide_list[::-1][i]:
