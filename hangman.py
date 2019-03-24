@@ -160,6 +160,7 @@ def main():
         c = 0
         print("\n"+s+"\n")
         while c < d:
+            draw_gallows(d-c)
             g = get_g()
             if g == 1:
                 print("See you next time.")
@@ -183,10 +184,22 @@ def main():
                 print("\n\n"+g.upper(), "is missing...\t", end="")
                 print("Number of wrong guesses left:", d-c)
                 if d-c == 0:
+                    draw_gallows(d-c)
                     print("Game over. Correct answer was:", pts(l_ans).upper())
                 else:
                     print("\n" + pts(p) + "\n")
         return
+
+    def draw_gallows(d):
+        a = "   "+"_"*8+"\n    |/   |\n    |   (_)\n"
+        b = "    |   /|\\\n    |    |\n    |   / \\\n"
+        c = "    |\n    |___\n"
+        gallows = a+b+c
+        hide_list = [[21], [31, 32, 33], [44, 56], [43], [45], [66], [68]]
+        for i in range(d):
+            for j in hide_list[::-1][i]:
+                gallows = gallows[:j]+" "+gallows[j+1:]
+        print(gallows)
 
     menu()
     input('(Press any key to exit.)')
