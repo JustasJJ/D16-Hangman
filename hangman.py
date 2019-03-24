@@ -33,9 +33,9 @@ def main():
                 elif len(g) == 1:
                     return g
                 else:
-                    print("Please, use only one letters.")
+                    print("Please, use only one letter.")
             else:
-                print("Please, use only one letters.")
+                print("Please, use only one letter.")
 
     # d - difficulty, the number of wrong guesses.
     def get_d():
@@ -109,13 +109,54 @@ def main():
         if w == 1:
             print("See you next time.")
             return
-        l_ans = wtl(w)
-        p = wtp(w)
-        s = pts(p)
         d = get_d()
         if d == 1:
             print("See you next time.")
             return
+        check_guesses(w, d)
+        return
+
+    def guess_riddle():
+        d = get_d()
+        if d == 1:
+            print("See you next time.")
+            return
+        ctg = ""
+        while ctg not in ["daiktai", "gamta", "gyvūnai"]:
+            ctg = input('Select category (daiktai, gamta, gyvūnai): ').lower()
+            if ctg not in ["daiktai", "gamta", "gyvūnai"]:
+                print("Incorrect! Try again.")
+        dct = {}
+        f = open("riddles.txt", "r")
+        for line in f:
+            if line.strip() == '*' + ctg + '*':  # start reading file
+                break
+        for line in f:
+            if "*" not in line and len(line) > 3:  # populate dict with riddles
+                (key, val) = line.split("?")
+                dct[key+"?"] = val[1:-1]
+            else:
+                break   # ends reading file
+        f.close()
+        riddle = random.choice(list(dct.keys()))  # select random riddle
+        print(riddle[:-1] + ". Kas?")
+        check_guesses(dct[riddle], d)
+        return
+
+    def guess_random_word():
+        d = get_d()
+        if d == 1:
+            print("See you next time.")
+            return
+        words = [line.rstrip().lower() for line in open("words.txt")]
+        word = random.choice(words)
+        check_guesses(word, d)
+        return
+
+    def check_guesses(answer, d):
+        l_ans = wtl(answer)
+        p = wtp(answer)
+        s = pts(p)
         c = 0
         print("\n"+s+"\n")
         while c < d:
@@ -123,12 +164,12 @@ def main():
             if g == 1:
                 print("See you next time.")
                 break
-            if g in w:
-                f = w.find(g)
+            if g in answer:
+                f = answer.find(g)
                 while f >= 0:
                     p[f] = " " + g.upper() + " "
-                    f = w.find(g, f+1)
-                print("\n\n"+g.upper(), "is in a word!\t", end='')
+                    f = answer.find(g, f + 1)
+                print("\n\n"+g.upper(), "is in a word!\t", end="")
                 print("Number of wrong answers left:", d-c)
                 s = pts(p)
                 print("\n"+s+"\n")
@@ -144,112 +185,8 @@ def main():
                 if d-c == 0:
                     print("Game over. Correct answer was:", pts(l_ans).upper())
                 else:
-                    print("\n"+pts(p)+"\n")
-
-    def guess_riddle():
-        ctg = ""
-        while ctg not in ["daiktai", "gamta", "gyvūnai"]:
-            ctg = input('Select category (daiktai, gamta, gyvūnai): ').lower()
-            if ctg not in ["daiktai", "gamta", "gyvūnai"]:
-                print("Incorrect! Try again.")
-        d = {}
-        f = open("riddles.txt", "r")
-        for line in f:
-            if line.strip() == '*' + ctg + '*':  # start reading file
-                break
-        for line in f:
-            if "*" not in line and len(line) > 3:  # populate dict with riddles
-                (key, val) = line.split("?")
-                d[key+"?"] = val[1:-1]
-            else:
-                break   # ends reading file
-        f.close()
-        riddle = random.choice(list(d.keys()))  # select random riddle
-        w = d[riddle]
-        l_ans = wtl(w)
-        p = wtp(w)
-        s = pts(p)
-        d = get_d()
-        if d == 1:
-            print("See you next time.")
-            return
-        c = 0
-        print(riddle[:-1] + ". Kas?")
-        print("\n" + s + "\n")
-        while c < d:
-            g = get_g()
-            if g == 1:
-                print("See you next time.")
-                break
-            if g in w:
-                f = w.find(g)
-                while f >= 0:
-                    p[f] = " " + g.upper() + " "
-                    f = w.find(g, f + 1)
-                print("\n\n" + g.upper(), "is in a word!\t", end="")
-                print("Number of wrong answers left:", d-c)
-                s = pts(p)
-                print("\n" + s + "\n")
-                if "_" in s:
-                    pass
-                else:
-                    print("Congratulations! You won!")
-                    break
-            else:
-                c += 1
-                print("\n\n" + g.upper(), "is missing...\t", end="")
-                print("Number of wrong guesses left:", d-c)
-                if d - c == 0:
-                    print("Game over. Correct answer was:", pts(l_ans).upper())
-                else:
-                    print("\n"+pts(p)+"\n")
-        return
-
-    def random_word():
-        words = [line.rstrip().lower() for line in open("words.txt")]
-        word = random.choice(words)
-        return word
-
-    def guess_random_word():
-        w = random_word()
-
-        l_ans = wtl(w)
-        p = wtp(w)
-        s = pts(p)
-        d = get_d()
-        if d == 1:
-            print("See you next time.")
-            return
-        c = 0
-        print("\n" + s + "\n")
-
-        while c < d:
-            g = get_g()
-            if g == 1:
-                print("See you next time.")
-                break
-            if g in w:
-                f = w.find(g)
-                while f >= 0:
-                    p[f] = " " + g.upper() + " "
-                    f = w.find(g, f + 1)
-                print("\n\n"+g.upper(), "is in a word!\t", end="")
-                print("Number of wrong answers left:", d-c)
-                s = pts(p)
-                print("\n" + s + "\n")
-                if "_" in s:
-                    pass
-                else:
-                    print("Congratulations! You won!")
-                    break
-            else:
-                c += 1
-                print("\n\n"+g.upper(), "is missing...\t", end="")
-                print("Number of wrong guesses left:", d-c)
-                if d - c == 0:
-                    print("Game over. Correct answer was:", pts(l_ans).upper())
-                else:
                     print("\n" + pts(p) + "\n")
+        return
 
     menu()
     input('(Press any key to exit.)')
