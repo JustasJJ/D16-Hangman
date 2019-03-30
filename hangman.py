@@ -151,6 +151,8 @@ def main():
         p = word_to_puzzle(answer)
         s = puzzle_to_string(p)
         c = 0
+        h = [] # histroy of guesses as a list
+        hst = "none" # history of guesses as a string
         print("\n"+s+"\n")
         while c < d:
             draw_gallows(d-c)
@@ -158,30 +160,35 @@ def main():
             if g == -1:
                 print("See you next time.")
                 break
-            if g in answer:
-                f = answer.find(g)
-                while f >= 0:
-                    p[f] = " " + g.upper() + " "
-                    f = answer.find(g, f + 1)
-                print("\n\n"+g.upper(), "is in a word!\t", end="")
-                print("Number of wrong answers left:", d-c)
-                s = puzzle_to_string(p)
+            elif g in h:
+                print("\n"+g.upper(),"is already guessed. Try another letter.")
+                print("Already guessed letters:",hst+".")
                 print("\n"+s+"\n")
-                if "_" in s:
-                    pass
-                else:
-                    print("Congratulations! You won!")
-                    break
             else:
-                c += 1
-                print("\n\n"+g.upper(), "is missing...\t", end="")
-                print("Number of wrong guesses left:", d-c)
-                if d-c == 0:
-                    draw_gallows(d-c)
-                    print("Game over. Correct answer was:", end="")
-                    print(puzzle_to_string(l_ans).upper())
+                h.append(g)
+                hst=", ".join(h).upper()
+                if g in answer:
+                    f = answer.find(g)
+                    while f >= 0:
+                        p[f] = " " + g.upper() + " "
+                        f = answer.find(g, f + 1)
+                    print("\n\n"+g.upper(), "is in a word!\tNumber of wrong answers left:",d-c,"\nAlready guessed letters:",hst+".", end="")
+                    s = puzzle_to_string(p)
+                    print("\n"+s+"\n")
+                    if "_" in s:
+                        pass
+                    else:
+                        print("Congratulations! You won!")
+                        break
                 else:
-                    print("\n" + puzzle_to_string(p) + "\n")
+                    c += 1
+                    print("\n\n"+g.upper(), "is missing...\tNumber of wrong guesses left:",d-c,"\nAlready guessed letters:",hst+".", end="")
+                    if d-c == 0:
+                        draw_gallows(d-c)
+                        print("Game over. Correct answer was:", end="")
+                        print(puzzle_to_string(l_ans).upper())
+                    else:
+                        print("\n" + puzzle_to_string(p) + "\n")
         input("(Press any key to continue.)")
         return
 
