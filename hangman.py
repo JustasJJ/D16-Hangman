@@ -11,7 +11,7 @@ def main():
                 if w == "quit":
                     quit = input("Do you want to quit? Y/N : ").lower()
                     if quit == "y":
-                        return 1
+                        return -1
                     else:
                         print("Let's continue.")
                 else:
@@ -27,7 +27,7 @@ def main():
                 if g == "quit":
                     quit = input("Do you want to quit? Y/N : ").lower()
                     if quit == "y":
-                        return 1
+                        return -1
                     else:
                         print("Let's continue.")
                 elif len(g) == 1:
@@ -48,7 +48,7 @@ def main():
                 if d == "quit":
                     quit = input("Do you want to quit? Y/N : ").lower()
                     if quit == "y":
-                        return 1
+                        return -1
                     else:
                         print("Let's continue.")
                 else:
@@ -99,11 +99,11 @@ def main():
 
     def guess_word():
         w = get_input_word()
-        if w == 1:
+        if w == -1:
             print("See you next time.")
             return
         d = get_difficulty()
-        if d == 1:
+        if d == -1:
             print("See you next time.")
             return
         check_guesses(w, d)
@@ -111,7 +111,7 @@ def main():
 
     def guess_riddle():
         d = get_difficulty()
-        if d == 1:
+        if d == -1:
             print("See you next time.")
             return
         ctg = ""
@@ -138,7 +138,7 @@ def main():
 
     def guess_random_word():
         d = get_difficulty()
-        if d == 1:
+        if d == -1:
             print("See you next time.")
             return
         words = [line.rstrip().lower() for line in open("words.txt")]
@@ -155,7 +155,7 @@ def main():
         while c < d:
             draw_gallows(d-c)
             g = get_guess()
-            if g == 1:
+            if g == -1:
                 print("See you next time.")
                 break
             if g in answer:
