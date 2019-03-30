@@ -1,4 +1,4 @@
-*daiktai*
+*items*
 Pusë geleþies, pusë medþio – medá ëda? peilis
 Liesas vaikelis, medþio ðvarkelis. Visa bëda – nosis juoda? pieðtukas
 Maþas ðulinëlis, juodas vandenëlis, kas nori gurkðnoja ir baltais laukais neðioja? knyga
@@ -10,7 +10,7 @@ Graþi mergelë panèiu susijuosusi, asloje ðoka? ðluota
 Þemëj gimiau, ugny apsikrikðtijau, ant vandens puoliau ir pats prapuoliau? druska
 Kai atimi daugiau, kai pridedi – maþiau? duobë
 
-*gamta*
+*nature*
 Jaunas þaliuoja, pasenæs þemën griûva, mirdamas dangun lekia? medis
 Uþaugo ant lauko be ðaknø? akmuo
 Be rankø, be kojø palangiais beldþiasi, á vidø praðosi? vëjas
@@ -21,7 +21,7 @@ Auksu mesta, sidabru atausta, deimanto peiliu rëþta? vaivorykðtë
 Þemiau uþ gyvatæ ðliauþioja, aukðèiau uþ paukðèius skraido? vanduo
 Visà ðalá balta paklodë uþklojo? sniegas
 
-*gyvûnai*
+*animals*
 Keturios seselës á vienà kasà taupo? karvë
 Gyvas – lavonas, numiræs – raudonas? vëþys
 Akys kaip ratai, o saulës nemato? pelëda
