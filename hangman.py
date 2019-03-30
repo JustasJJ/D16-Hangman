@@ -73,7 +73,7 @@ def main():
             p.append(" _ ")
         return p
 
-    def puzzle_to_string(p):  # "[w, h, e, e, l]" ---> " _  _  _  _  _ "
+    def puzzle_to_string(p):  # "[w, " _ ", " _ ", e, l]" --> " w  _  _  e  l "
         s = ""
         for i in range(0, len(p)):
             s += p[i]
