@@ -68,9 +68,7 @@ def main():
         return p
 
     def word_to_puzzle(w):  # "wheel" ---> "[" _ "," _ "," _ "," _ "," _ "]"
-        p = []
-        for i in range(0, len(w)):
-            p.append(" _ ")
+        p = [" _ "]*len(w)
         return p
 
     def puzzle_to_string(p):  # "[w, " _ ", " _ ", e, l]" --> " w  _  _  e  l "
