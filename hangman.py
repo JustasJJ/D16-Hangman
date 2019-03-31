@@ -174,7 +174,7 @@ def main():
                         f = answer.find(g, f + 1)
                     print("\n\n"+g.upper(), "is in a word!", end="")
                     print("\tNumber of wrong answers left:", d-c)
-                    print(" Already guessed letters:", hst+".")
+                    print("Already guessed letters:", hst+".")
                     s = puzzle_to_string(p)
                     print("\n"+s+"\n")
                     if "_" in s:
@@ -185,8 +185,8 @@ def main():
                 else:
                     c += 1
                     print("\n\n"+g.upper(), "is missing...\t", end="")
-                    print("Number of wrong guesses left:", d-c, end="")
-                    print(" Already guessed letters:", hst+".")
+                    print("Number of wrong guesses left:", d-c)
+                    print("Already guessed letters:", hst+".")
                     if d-c == 0:
                         draw_gallows(d-c)
                         print("Game over. Correct answer was:", end="")
