@@ -1,0 +1,12 @@
+{% extends "Hangman.html" %}
+{% block title %}Get input word{% endblock%}
+{% block intro %}Let's play!{% endblock %}
+{% block game %}
+    <div class="bottom centered">  
+		<form action="{{ url_for('game') }}" method="POST">
+            <label>Player 1 please choose a word:</label>
+            <input type="password" pattern="[a-ząčęėįšųūž]+" name="answer" value="" required="required" title="Only words please" autofocus>
+            <input type="submit" value="Submit!">
+            </form>
+    </div>    
+{% endblock%}

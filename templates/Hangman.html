@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% block head %}
+  <title>Hangman | {% block title %}Home{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/static/css/Hangman.css">
+  {% endblock %}
+</head>
+<body>
+    <div class="container">
+        <h1>{% block intro %}Welcome to Hangman D16{% endblock %}</h1>
+        {% block question %}{% endblock %}
+        {% block game%}
+        <h2>***** MENU *****</h2>
+        <p>Select play mode:</p>
+        <div class="list-group">
+          <a href="{{ url_for('guess_input') }}" class="list-group-item">1. Guess input word</a>
+          <a href="{{ url_for('guess_random') }}" class="list-group-item">2. Guess random word</a>
+          <a href="{{ url_for('guess_riddle') }}" class="list-group-item">3. Guess lithuanian riddle</a>
+        </div>
+        {% endblock %}
+    </div>
+    
+    <div class="wrapper">
+        <div class="top_frame">
+            <div class="side_frame">
+            </div>
+            <div class="base_frame">
+            </div>    
+                <div class="angle1">
+                </div>
+                <div class="angle2">
+                </div>
+        </div>
+        {%block stickman %}
+        {% endblock %}
+    </div>
+    
+    {%block word %}
+    {% endblock %}
+</body>
+</html>

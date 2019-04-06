@@ -1,0 +1,13 @@
+{% extends "Hangman.html" %}
+{% block title %}Riddle{% endblock%}
+{% block intro %}Let's play!{% endblock %}
+{% block game %}
+    <div class="bottom centered">  
+		<form action="{{ url_for('riddle_game') }}" method="POST">
+            Choose your favourite category:
+            <button name="category" type="submit" value="animals">Animals</button>
+            <button name="category" type="submit" value="nature">Nature</button>
+            <button name="category" type="submit" value="items">Items</button>
+            </form>
+    </div>    
+{% endblock%}

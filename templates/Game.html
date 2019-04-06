@@ -1,0 +1,129 @@
+{% extends "Hangman.html" %}
+{% block title %}Game{% endblock%}
+{% block intro %}Let's play!{% endblock %}
+{% block question %}
+<p align="center">{{ question }}</p>
+<p></p>   
+{% endblock %}
+
+{% block game %}
+    <div class="bottom centered">  
+        {% if answer == puzzle_st %}  
+        <h1>Congratulations! You won!</h1>
+        <form action="{{ url_for('index') }}" method="POST">
+        <input type="submit" id="Button1" name="" value="Get back to menu">
+        </form>
+        {% else%}
+            {% if score < 6 %}  
+            <form action="{{ url_for('guess') }}" method="POST">
+                <label>Please choose a letter:</label>
+                <input type="text" name="guess" pattern="[a-ząčęėįšųūž]*" maxlength="1" value="" required="required" title="Only single letter allowed." autofocus>
+                <input type="submit" value="Submit!">
+            </form>
+            <h1>Lives left: {{ 6-score }}</h1>
+		    {% else %}
+            <h1>GAME OVER!</h1>
+            <form action="{{ url_for('index') }}" method="POST">
+            <input type="submit" id="Button1" name="" value="Get back to menu">
+            </form>
+            {% endif %}
+		{% endif %}
+    </div>    
+{% endblock%}
+
+{%block word %}
+    <div class="display_word">
+        <ul>
+            {% for guess in puzzle %}
+                <li>{{guess}}</li>
+            {% endfor %}    
+        </ul>        
+    </div>
+    {%if guess %}
+    <p align="center">Last choice:</p>
+    <div class="guessed_letter centered">
+        <ul>
+            <li>{{guess}}</li>    
+        </ul>
+    </div>
+    {% endif %}
+    <p align="center">Guessed letters:</p>
+    <div class="guessed_letters centered">
+        <ul>
+            {% for guess in history %}
+            <li>{{guess}}</li>
+            {% endfor %}
+        </ul>
+    </div>    
+{% endblock %}
+
+{%block stickman %}
+{% if answer == puzzle_st %}
+<div class="headw">
+    <div class="lefteye">
+    </div>
+    <div class="righteye">
+    </div>
+    <div class="mouthw">
+    </div>         
+    <div class="body">       
+        <div class="rightarm">
+        </div>
+        <div class="leftarm">
+        </div>
+        <div class="leftleg">
+        </div>
+        <div class="rightleg">
+        </div>        
+    </div>
+</div> 
+{% else %}
+    {% if score < 6 %} 
+        {% if score >= 1 %}
+        <div class="head">
+            <div class="lefteye">
+            </div>
+            <div class="righteye">
+            </div>        
+        {% if score >= 2 %}
+        <div class="body">       
+        {% if score >= 3 %}
+        <div class="rightarm">
+        </div>
+        {% endif %}    
+        {% if score >= 4 %}
+        <div class="leftarm">
+        </div>
+        {% endif %}    
+        {% if score >= 5 %}
+        <div class="leftleg">
+        </div>
+        {% endif %}    
+        {% if score >= 6 %}
+        <div class="rightleg">
+        </div>        
+        {% endif %}
+        </div>
+        {% endif %} 
+        </div>   
+        {% endif %}
+    {% else %} 
+    <div class="head">
+        <div class="lefteyel">
+        </div>
+        <div class="righteyel">
+        </div>        
+        <div class="body">       
+            <div class="rightarm">
+            </div>
+            <div class="leftarm">
+            </div>
+            <div class="leftleg">
+            </div>
+            <div class="rightleg">
+            </div>        
+        </div>
+    </div> 
+    {% endif %}
+{% endif %}                   
+{% endblock %}
