@@ -161,7 +161,9 @@ def main():
                 print("See you next time.")
                 break
             elif g in h:
-                print("\n"+g.upper(), "is already guessed. Try another letter")
+                print("\n"+g.upper(), "is already guessed. ", end="")
+                print("Try other letter.")
+                print("Number of wrong answers left:", d-c)
                 print("Already guessed letters:", hst+".")
                 print("\n"+s+"\n")
             else:
@@ -172,25 +174,27 @@ def main():
                     while f >= 0:
                         p[f] = " " + g.upper() + " "
                         f = answer.find(g, f + 1)
-                    print("\n\n"+g.upper(), "is in a word!", end="")
-                    print("\tNumber of wrong answers left:", d-c)
+                    print("\n\n"+g.upper(), "is in a word!")
+                    print("Number of wrong answers left:", d-c)
                     print("Already guessed letters:", hst+".")
                     s = puzzle_to_string(p)
                     print("\n"+s+"\n")
                     if "_" in s:
                         pass
                     else:
-                        print("Congratulations! You won!")
+                        draw_gallows(d-c)
+                        print("Congratulations! You won! ", end="")
                         break
                 else:
                     c += 1
-                    print("\n\n"+g.upper(), "is missing...\t", end="")
+                    print("\n\n"+g.upper(), "is missing...")
                     print("Number of wrong guesses left:", d-c)
                     print("Already guessed letters:", hst+".")
                     if d-c == 0:
+                        print("\n"+s+"\n")
                         draw_gallows(d-c)
-                        print("Game over. Correct answer was:", end="")
-                        print(puzzle_to_string(l_ans).upper())
+                        print("Game over. Correct answer was: ", end="")
+                        print(puzzle_to_string(l_ans).upper()+" ", end="")
                     else:
                         print("\n" + puzzle_to_string(p) + "\n")
         input("(Press any key to continue.)")
