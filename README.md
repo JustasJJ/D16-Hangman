@@ -4,7 +4,13 @@ A project for Vilnius School of AI. Classic hangman game with 3 playmodes: guess
 
 ## Getting Started
 
-Clone the files and run hangman.py to start the game.
+Clone the files and run hangman.py to start the game on console.
+
+For web app:
+
+pip install flask
+
+Run main.py on terminal and open 127.0.0.1:5000 to play the game
 
 ### Prerequisites
 
@@ -16,9 +22,9 @@ Python 3 installed on Windows. See installation guide [HERE](https://realpython.
 
 ## Authors
 
-* **Justinas Jankevicius** - *Initial work/ Guess riddle playmode* - [JustasJJ](https://github.com/JustasJJ)
+* **Justinas Jankevicius** - *Initial work/ Guess riddle playmode/ web app* - [JustasJJ](https://github.com/JustasJJ)
 * **Donatas Valius** - *Initial work/ Guess input word playmode* - [donatasvalius](https://github.com/donatasvalius)
-* **Deivydas Liucvaitis** - *Guess random word playmode* - [deivydasli](https://github.com/deivydasli)
+* **Deivydas Liucvaitis** - *Guess random word/ multiplayer playmodes/ leaderboard* - [deivydasli](https://github.com/deivydasli)
 
 See also the list of [contributors](https://github.com/JustasJJ/D16-Hangman/graphs/contributors) who participated in this project.
 
